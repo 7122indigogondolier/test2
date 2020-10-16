@@ -1,0 +1,5 @@
+               Asian:     35 
+              latinx:     69 
+               white:    193 
+    african american:     74 
+                 nan:     29 
