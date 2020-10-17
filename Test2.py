@@ -4,8 +4,8 @@ import matplotlib.pyplot as plt
 from sklearn.linear_model import LinearRegression
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.preprocessing import StandardScaler
+from sklearn.preprocessing import PolynomialFeatures
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import classification_report
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import r2_score
 from sklearn.metrics import mean_squared_error
@@ -13,18 +13,18 @@ from sklearn.metrics import mean_squared_error
 # Loading the admission dataset from the csv file using pandas
 datafile = 'Admission_Predict.csv'
 df = pd.read_csv(datafile, header=0)
-colnames  = ['SN', 'GRE', 'TOEFL', 'URATE', 'SOP', 'LOR', 'CGPA', 'RES', 'ADM', 'RACE', 'SES']
-reorder_colnames = ['SN', 'GRE', 'TOEFL', 'URATE', 'SOP', 'LOR', 'CGPA', 'RES', 'RACE', 'SES', 'ADM']
-features = ['GRE', 'TOEFL', 'URATE', 'SOP', 'LOR', 'CGPA', 'RES', 'SES', 'RACE', 'ADM']
+colnames = ['SN', 'GRE', 'TOEFL', 'URATE', 'SOP', 'LOR', 'CGPA', 'RES', 'ADM', 'RACE', 'SES']
+reorder_colnames = ['SN', 'GRE', 'TOEFL', 'URATE', 'SOP', 'LOR', 'CGPA', 'RES', 'SES', 'ADM', 'RACE']
 df.columns = colnames
-df.reindex(columns=reorder_colnames)
-numerical = ['GRE', 'TOEFL', 'URATE', 'SOP', 'LOR', 'CGPA', 'RES', 'SES']
 print("Number of rows: " + str(len(df.index)))
 df.dropna(inplace=True)
 print("Number of valid rows without missing values: " + str(len(df.index)))
-# print(data.head(10))
+df = df.reindex(columns=reorder_colnames)
+df = pd.get_dummies(df, columns=['RACE'])
+features = ['GRE', 'TOEFL', 'URATE', 'SOP', 'LOR', 'CGPA', 'RES', 'SES', 'RACE_Asian', 'RACE_african american', 'RACE_latinx',
+       'RACE_white']
 y = df['ADM']
-X = df[numerical]
+X = df[features]
 std = StandardScaler()
 std.fit(X)
 
@@ -35,6 +35,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 lr = LinearRegression()
 lr.fit(X_train, y_train)
 y_pred_lr = lr.predict(X_test)
+print('------------Linear Regression------------')
 print('Slope: %.3f' % lr.coef_[0])
 print('Intercept: %.3f' % lr.intercept_)
 print('R2 score: %.3f' % r2_score(y_test, y_pred_lr))
