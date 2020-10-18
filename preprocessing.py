@@ -1,11 +1,6 @@
-import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
-from sklearn.linear_model import LogisticRegression
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import classification_report
-from sklearn.metrics import accuracy_score
 
 # Loading the admission dataset from the csv file using pandas
 datafile = 'Admission_Predict.csv'
