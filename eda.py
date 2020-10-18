@@ -22,11 +22,6 @@ reorder_colnames = ['SN', 'GRE', 'TOEFL', 'URATE', 'SOP', 'LOR', 'CGPA', 'RES', 
 df.columns = colnames
 df.dropna(inplace=True)
 df = df.reindex(columns=reorder_colnames)
-# We need to find a way to convert race into numerical values
-# We need to fill out/remove the NaN and Null values
-    # For this we can either fill in the values or,
-    # we can remove rows containing null / NaN values
-# Once we finish these things, we will finally be able to plot the scatterplot and correlation matrix
 df = pd.get_dummies(df, columns=['RACE'])
 outputlast = ['SN', 'GRE', 'TOEFL', 'URATE', 'SOP', 'LOR', 'CGPA', 'RES', 'SES', 'RACE_Asian', 'RACE_african american', 'RACE_latinx',
        'RACE_white', 'ADM']
