@@ -12,12 +12,8 @@ from sklearn.preprocessing import OneHotEncoder
 
 datafile = 'Admission_Predict.csv'
 df = pd.read_csv(datafile, header=0)
-colnames  = ['SN', 'GRE', 'TOEFL', 'URATE', 'SOP', 'LOR', 'CGPA', 'RES', 'ADM', 'RACE', 'SES']
+colnames = ['SN', 'GRE', 'TOEFL', 'URATE', 'SOP', 'LOR', 'CGPA', 'RES', 'ADM', 'RACE', 'SES']
 reorder_colnames = ['SN', 'GRE', 'TOEFL', 'URATE', 'SOP', 'LOR', 'CGPA', 'RES', 'SES', 'ADM', 'RACE']
-# serial number is omitted from the features because serial number should not matter in predicting
-# admissions
-# I have reordered the columns so that the column with the target value (admission likelihood) is
-# the last column (makes our graphs easier to read)
 
 df.columns = colnames
 df.dropna(inplace=True)
