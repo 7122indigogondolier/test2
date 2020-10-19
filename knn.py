@@ -6,7 +6,7 @@ from preprocessing import get_data
 
 
 def knn_model():
-    X_train, X_test, y_train, y_test = get_data('Admission_Predict.csv')
+    X_train, X_test, y_train, y_test = get_data('Admission_Predict.csv', False)
     knn = KNeighborsClassifier(n_neighbors=10, metric='manhattan', weights='distance')
     knn.fit(X_train, y_train)
     y_pred = knn.predict(X_test)

@@ -4,7 +4,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
 
 
-def get_data(datafile):
+def get_data(datafile, continuous=False):
     # Loading the admission dataset from the csv file using pandas
     df = pd.read_csv(datafile, header=0)
     colnames = ['SN', 'GRE', 'TOEFL', 'URATE', 'SOP', 'LOR', 'CGPA', 'RES', 'ADM', 'RACE', 'SES']
@@ -20,14 +20,15 @@ def get_data(datafile):
     df = df.reindex(columns=reorder_colnames)
     df = pd.get_dummies(df, columns=['RACE'])
 
-    # Transforming the output into binary classes using threshold of 0.73
-    df.loc[(df.ADM >= 0.73), 'ADM'] = 1
-    df.loc[(df.ADM < 0.73), 'ADM'] = 0
+    if not continuous:
+        # Transforming the output into binary classes using threshold of 0.73
+        df.loc[(df.ADM >= 0.73), 'ADM'] = 1
+        df.loc[(df.ADM < 0.73), 'ADM'] = 0
 
     # Defining features and target
     features = ['GRE', 'TOEFL', 'URATE', 'SOP', 'LOR', 'CGPA', 'RES', 'SES',
                 'RACE_Asian', 'RACE_african american', 'RACE_latinx', 'RACE_white']
-    test_features = ['GRE', 'TOEFL', 'URATE', 'SOP', 'LOR', 'CGPA', 'RES']
+    test_features = ['GRE', 'TOEFL', 'URATE', 'SOP', 'LOR', 'CGPA', 'RES', 'SES', 'RACE_african american', 'RACE_latinx']
     X = df[features]
     y = df['ADM']
 
