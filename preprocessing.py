@@ -28,8 +28,10 @@ def get_data(datafile, continuous=False):
     # Defining features and target
     features = ['GRE', 'TOEFL', 'URATE', 'SOP', 'LOR', 'CGPA', 'RES', 'SES',
                 'RACE_Asian', 'RACE_african american', 'RACE_latinx', 'RACE_white']
-    test_features = ['GRE', 'TOEFL', 'URATE', 'SOP', 'LOR', 'CGPA', 'RES', 'SES', 'RACE_african american', 'RACE_latinx']
+    remove_SES = ['GRE', 'TOEFL', 'URATE', 'SOP', 'LOR', 'CGPA', 'RES',
+                'RACE_Asian', 'RACE_african american', 'RACE_latinx', 'RACE_white']
     X = df[features]
+    # X = df[remove_SES]
     y = df['ADM']
 
     # Scaling the features
@@ -37,7 +39,7 @@ def get_data(datafile, continuous=False):
     std.fit(X)
 
     # Split training and testing data
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=1)
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
     return X_train, X_test, y_train, y_test
 
 
