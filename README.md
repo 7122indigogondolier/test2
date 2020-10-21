@@ -5,6 +5,6 @@ Since we needed to explore all the classifiers we have learned so far, we divide
 
 Abhi:
 
-Tina: Built linear regression, tested KNN, decision tree, random forest, and part of data preprocessing
+Tina: Built linear regression, tested KNN, decision tree, random forest, did initial EDA, and part of data preprocessing and documentation pdf.
 
 Utkrist: Built logistic regression, tested RandomForestRegressor, SVM (SVC and SVR from sklearn), plotted histograms for feature distribution, plotted graphs for hyperparameter testing, part of data preprocessing and documentation pdf. 
